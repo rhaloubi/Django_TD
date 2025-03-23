@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Liste des Étudiants{% endblock %}
+
+{% block content %}
+<h1>Liste des Étudiants</h1>
+<a href="{% url 'etudiant-create' %}" class="btn btn-primary mb-3">Ajouter un étudiant</a>
+
+<div class="list-group">
+    {% for etudiant in etudiants %}
+    <div class="list-group-item">
+        <h5>{{ etudiant.prenom }} {{ etudiant.nom }}</h5>
+        <p>Email: {{ etudiant.email }}</p>
+        <div>
+            <a href="{% url 'etudiant-detail' etudiant.pk %}" class="btn btn-info btn-sm">Détails</a>
+            <a href="{% url 'etudiant-update' etudiant.pk %}" class="btn btn-warning btn-sm">Modifier</a>
+            <a href="{% url 'etudiant-delete' etudiant.pk %}" class="btn btn-danger btn-sm">Supprimer</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>Aucun étudiant enregistré.</p>
+    {% endfor %}
+</div>
+{% endblock %}

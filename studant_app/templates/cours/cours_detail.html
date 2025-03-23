@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Détails du cours{% endblock %}
+
+{% block content %}
+<h1>{{ cours.titre }}</h1>
+<div class="card">
+    <div class="card-body">
+        <p><strong>Code:</strong> {{ cours.code_cours }}</p>
+        <p><strong>Description:</strong> {{ cours.description }}</p>
+        <h3>Étudiants inscrits:</h3>
+        <ul>
+            {% for etudiant in cours.etudiants.all %}
+            <li>{{ etudiant.prenom }} {{ etudiant.nom }}</li>
+            {% empty %}
+            <li>Aucun étudiant inscrit</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div class="mt-3">
+    <a href="{% url 'cours-update' cours.pk %}" class="btn btn-warning">Modifier</a>
+    <a href="{% url 'cours-delete' cours.pk %}" class="btn btn-danger">Supprimer</a>
+    <a href="{% url 'cours-list' %}" class="btn btn-secondary">Retour</a>
+</div>
+{% endblock %}

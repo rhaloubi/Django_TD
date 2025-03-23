@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Liste des Cours{% endblock %}
+
+{% block content %}
+<h1>Liste des Cours</h1>
+<a href="{% url 'cours-create' %}" class="btn btn-primary mb-3">Ajouter un cours</a>
+
+<div class="list-group">
+    {% for cours in cours_list %}
+    <div class="list-group-item">
+        <h5>{{ cours.titre }}</h5>
+        <p>Code: {{ cours.code_cours }}</p>
+        <div>
+            <a href="{% url 'cours-detail' cours.pk %}" class="btn btn-info btn-sm">Détails</a>
+            <a href="{% url 'cours-update' cours.pk %}" class="btn btn-warning btn-sm">Modifier</a>
+            <a href="{% url 'cours-delete' cours.pk %}" class="btn btn-danger btn-sm">Supprimer</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>Aucun cours enregistré.</p>
+    {% endfor %}
+</div>
+{% endblock %}
